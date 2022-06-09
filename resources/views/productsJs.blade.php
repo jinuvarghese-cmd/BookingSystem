@@ -54,28 +54,26 @@
         function list(product){
             keys = Object.keys(product);
             values = Object.values(product);
-            var result =  keys.reduce(function(result, field, index) {
-            result[values[index]] = field;
-            return result;
-            }, {})
+            product = [];
+            for(var i = 0; i < keys.length; i++){
+                product[keys[i]] = values[i];
+            }
+            html += '<tr>';
+            for (var key in product) {
+                var value = product[key];
+                var editable = '';
+                (key == 'id') ? editable = '' :  editable = 'contenteditable';
+                (key == 'price') ? (value = '$' + value) :  value = value;
+                html +=  '<td ' + editable + ' class=' + key + '>';
+                html +=  '<p>' + value + '</p>';
+                html +=   '</td>';
+            }
 
-            console.log(result);
-            product.foreach(([type, value]) => display);
             html += '<td>';
             html += '<button type="button" class="btn btn-danger btn-xs update">Update</button>';
             html += '<button type="button" class="btn btn-danger btn-xs update">Delete</button>';
             html += '</td>';
             html += '</tr>';
-        }
-
-        function display(type, value){
-             html += '<tr>';
-             var editable = '';
-            (type == 'id') ? editable = '' :  editable = 'contenteditable';
-            (type == 'price') ? value = '$' . value :  value = value;
-            html +=  '<td' + editable + 'class=' + type + '>';
-            html +=  '<p>' + value + '</p>';
-            html +=   '</td>';
         }
     });
 </script>
