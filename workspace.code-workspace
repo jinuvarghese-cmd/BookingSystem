@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../argon"
+		},
+		{
+			"path": "../user-login"
+		},
+		{
+			"path": "../vox-ai"
+		}
+	],
+	"settings": {}
+}
