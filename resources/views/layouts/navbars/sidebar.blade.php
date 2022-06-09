@@ -76,6 +76,14 @@
                     </a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('bookings') }}">
+                        <i class="ni ni-cart text-primary"></i> {{ __('Orders') }}
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

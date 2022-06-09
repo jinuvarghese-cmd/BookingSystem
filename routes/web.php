@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BookingLineController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ Route::group(['prefix' => 'products'], function () {
 	Route::post('/create', [ProductController::class, 'create'])->name('products.create');
 	Route::post('/update', [ProductController::class, 'update'])->name('products.update');
 	Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
+});
+
+Route::group(['prefix' => 'bookings'], function () {
+    Route::get('/', [BookingLineController::class, 'index'])->name('bookings');
 });
 
 
