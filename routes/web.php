@@ -37,6 +37,8 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/', [ProductController::class, 'index'])->name('products');
 	Route::post('/', [ProductController::class, 'index'])->name('products.reload');
 	Route::post('/create', [ProductController::class, 'create'])->name('products.create');
+	Route::post('/update', [ProductController::class, 'update'])->name('products.update');
+	Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
 });
 
 

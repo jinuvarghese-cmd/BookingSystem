@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
        $products = Product::all('id', 'name', 'description', 'price')->toArray();
-       $product = Product::where('id', 1)->first();
+       $product = Product::first();
        $columns = array_keys($product->getOriginal());
        array_splice($columns, count($columns) - 3, 3);
 
@@ -85,22 +85,32 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
-        //
+        $Product = Product::find($request->id);
+        if ($Product == null) 
+        {
+            echo '<div class="alert alert-danger">Could not be updated, try again</div>';
+        }
+
+        $Product->name = $request->name;
+        $Product->description = $request->description;
+        $Product->price = $request->price;
+        $Product->save();
+        echo '<div class="alert alert-success">Data Updated</div>';
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request)
     {
-        //
+        if($request->ajax())
+         {
+            $product = Product::find($request->id);
+            $product->delete();
+            echo '<div class="alert alert-success">Data Deleted</div>';
+         }
     }
 }

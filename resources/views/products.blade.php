@@ -23,7 +23,6 @@
                   </tr>
                 </thead>
                 <tbody class="list">
-
                   <tr>
                     <td></td>
                     <td contenteditable id="name"></td>
@@ -31,10 +30,20 @@
                     <td contenteditable id="price"></td>
                     <td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td>
                   </tr>
+                  @php
+                  $slNo = 0;
+                  @endphp
                   @foreach($products as $product)
+                  @php
+                  $slNo++;
+                  @endphp
                   <tr>
                     @foreach($product as $type => $value)
                       @php
+                        if($type == 'id'){
+                          $id = $value;
+                          $value = $slNo;
+                        }
                        ($type == 'id') ? $editable = '' :  $editable = 'contenteditable';
                        ($type == 'price') ? $value = '$' . $value :  $value = $value;
                       @endphp
@@ -43,8 +52,8 @@
                       </td>
                     @endforeach
                     <td>
-                        <button type="button" class="btn btn-danger btn-xs update">Update</button>
-                        <button type="button" class="btn btn-danger btn-xs update">Delete</button>
+                        <button type="button" class="btn btn-danger btn-xs update" id="{{$id}}">Update</button>
+                        <button type="button" class="btn btn-danger btn-xs delete" id="{{$id}}">Delete</button>
                     </td>
                   </tr>
                   @endforeach
