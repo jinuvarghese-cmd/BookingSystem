@@ -5,60 +5,60 @@
         $(document).on('click', '#add', function(){
             var name = $('#name').text();
             var description = $('#description').text();
-            var price = $('#price').text().slice(1);
+            var price = $('#price').text().trim();
 
-            if(name && description && price)
-            {
-                $.ajax({
-                 url:"{{ route('products.create') }}",
-                 method:"POST",
-                 data:{
+            $.ajax({
+                url:"{{ route('products.create') }}",
+                method:"POST",
+                data:{
                     "_token": "{{ csrf_token() }}",
                     name:name,
                     description:description,
                     price:price
                      },
-                success:function(data)
-                {
+                success:function(data){
+                    $('#message').html('');
                     $('#message').html(data);
                     reload();
-                }
-                });
-            }
-            else
-            {
-            $('#message').html("<div class='alert alert-danger'>Please type in the details</div>");
-            }
+                },
+                error: function (xhr) {
+                    $('#message').html('');
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('#message').append('<div class="alert alert-danger">'+value+'</div');
+                    }); 
+                 }
+             });
         });
 
         $(document).on('click', '.update', function(){
             var name = $(this).closest('tr').find('.name').text();
             var description = $(this).closest('tr').find('.description').text();
-            var price = $(this).closest('tr').find('.price').text().trim().slice(1);
+            var price = $(this).closest('tr').find('.price').text().trim();
             var id = $(this).attr("id");
   
-            if(name && description && price && id)
-            {
-                $.ajax({
-                    url:"{{ route('products.update') }}",
-                    method:"POST",
-                    data:{
-                        "_token": "{{ csrf_token() }}",
-                        name:name,
-                        description:description,
-                        price:price, 
-                        id:id
-                    },
-                    success:function(data)
-                    {
-                        $('#message').html(data);
-                        reload();
-                    }
-                })
-                 }else{
-                    $('#message').html("<div class='alert alert-danger'>Please type in the details</div>")
-                }
-            });
+            $.ajax({
+                url:"{{ route('products.update') }}",
+                method:"POST",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    name:name,
+                    description:description,
+                    price:price, 
+                    id:id
+                },
+                success:function(data){
+                    $('#message').html('');
+                    $('#message').html(data);
+                    reload();
+                },
+                error: function (xhr) {
+                    $('#message').html('');
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        $('#message').append('<div class="alert alert-danger">'+value+'</div');
+                    }); 
+                 }
+            })
+        });
 
         $(document).on('click', '.delete', function(){
            var id = $(this).attr("id");

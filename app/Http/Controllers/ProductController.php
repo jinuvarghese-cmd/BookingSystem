@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Schema;
 
@@ -35,7 +36,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(ProductRequest $request)
     {
         Product::create([
             'name' => $request->name,
@@ -84,9 +85,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\ProductRequest  $request
      */
-    public function update(Request $request)
+    public function update(ProductRequest $request)
     {
         $Product = Product::find($request->id);
         if ($Product == null) 
