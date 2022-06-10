@@ -30,60 +30,36 @@
                     <td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td>
                   </tr>
                   @php
-                  $slNo = 0;
+                    $slNo = ($products->perPage() * ($products->currentPage() - 1));
                   @endphp
                   @foreach($products as $product)
-                  @php
-                  $slNo++;
-                  @endphp
+                    @php
+                      $slNo++;
+                    @endphp
                   <tr>
-                    @foreach($product as $type => $value)
-                      @php
-                        if($type == 'id'){
-                          $id = $value;
-                          $value = $slNo;
-                        }
-                       ($type == 'id') ? $editable = '' :  $editable = 'contenteditable';
-                       ($type == 'price') ? $value = '$' . $value :  $value = $value;
-                      @endphp
-                      <td {{$editable}} class= {{$type}}>
-                        <p>{{$value}}</p>
-                      </td>
-                    @endforeach
+                    <td class="id"  class="id">
+                        <p>{{$slNo}}</p>
+                    </td>
+                    <td contenteditable class="name">
+                        <p>{{$product->name}}</p>
+                    </td>
+                    <td contenteditable class="description">
+                        <p>{{$product->description}}</p>
+                    </td>
+                    <td contenteditable class="price">
+                        <p>${{$product->price}}</p>
+                    </td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-xs update" id="{{$id}}">Update</button>
-                        <button type="button" class="btn btn-danger btn-xs delete" id="{{$id}}">Delete</button>
+                        <button type="button" class="btn btn-danger btn-xs update" id="{{$product->id}}">Update</button>
+                        <button type="button" class="btn btn-danger btn-xs delete" id="{{$product->id}}">Delete</button>
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
-            </div>
-            <!-- Card footer -->
-            <div class="card-footer py-4">
-              <nav aria-label="...">
-                <ul class="pagination justify-content-end mb-0">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">
-                      <i class="fas fa-angle-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="fas fa-angle-right"></i>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <div class="d-flex justify-content-center links-for-pagination">
+                {!! $products->links() !!}
+              </div>
             </div>
           </div>
         </div>

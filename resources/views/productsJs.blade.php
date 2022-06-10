@@ -88,6 +88,7 @@
                 method:"post",
                 dataType: "json",
                 success: function(data) {
+                    var links = data.links;
                     html = '';
                     html += '<tr>';
                     html += '<td></td>';
@@ -96,35 +97,26 @@
                     html += '<td contenteditable id="price"></td>';
                     html += '<td><button type="button" class="btn btn-success btn-xs" id="add">Add</button></td>';
                     html += '</tr>';
-                    data.forEach(list);
+                    var products = data.products;
+                    slNo = (products.per_page * (products.current_page - 1));
+                    products.data.forEach(list);
                     $('tbody').html(html);
+                    $('.links-for-pagination').empty().html(links);
                 }
            });
-           slNo =0;
         }
 
         function list(product){
             slNo++;
-            keys = Object.keys(product);
-            values = Object.values(product);
-            product = [];
-            for(var i = 0; i < keys.length; i++){
-                product[keys[i]] = values[i];
-            }
             html += '<tr>';
-            for (var key in product) {
-                var value = product[key];
-                var editable = '';
-                (key == 'id') ? (editable = '',id = value, value=slNo) :  editable = 'contenteditable';
-                (key == 'price') ? (value = '$' + value) :  value = value;
-                html +=  '<td ' + editable + ' class=' + key + '>';
-                html +=  '<p>' + value + '</p>';
-                html +=   '</td>';
-            }
+            html +=  '<td contenteditable class="id"><p>' + slNo + '</p></td>';
+            html +=  '<td contenteditable class="name"><p>' + product.name + '</p></td>';
+            html +=  '<td contenteditable class="description"><p>' + product.description + '</p></td>';
+            html +=  '<td contenteditable class="price"><p>$' + product.price + '</p></td>';
 
             html += '<td>';
-            html += '<button type="button" class="btn btn-danger btn-xs update" id="'+id+'">Update</button>';
-            html += '<button type="button" class="btn btn-danger btn-xs delete" id="'+id+'">Delete</button>';
+            html += '<button type="button" class="btn btn-danger btn-xs update" id="' + product.id + '">Update</button>';
+            html += '<button type="button" class="btn btn-danger btn-xs delete" id="' + product.id + '">Delete</button>';
             html += '</td>';
             html += '</tr>';
         }

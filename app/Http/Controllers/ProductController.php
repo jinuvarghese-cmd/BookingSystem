@@ -17,13 +17,19 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-       $products = Product::all('id', 'name', 'description', 'price')->toArray();
+       $products = Product::simplePaginate(8);
        $product = Product::first();
        $columns = array_keys($product->getOriginal());
        array_splice($columns, count($columns) - 3, 3);
 
+
        if($request->ajax()){
-        echo json_encode($products);
+        //echo json_encode($products);
+        return response()->json([
+            'success' => true,
+            'products' => $products,
+            'links' => (string)$products->links()
+        ]);
        }
        else{
         return view('products', ['columns' => $columns, 'products' => $products]);
