@@ -18,13 +18,8 @@ class ProductController extends Controller
     public function index(Request $request)
     {
        $products = Product::simplePaginate(8);
-       $product = Product::first();
-       $columns = array_keys($product->getOriginal());
-       array_splice($columns, count($columns) - 3, 3);
-
 
        if($request->ajax()){
-        //echo json_encode($products);
         return response()->json([
             'success' => true,
             'products' => $products,
@@ -32,7 +27,7 @@ class ProductController extends Controller
         ]);
        }
        else{
-        return view('products', ['columns' => $columns, 'products' => $products]);
+        return view('products', ['products' => $products]);
        }
        
     }

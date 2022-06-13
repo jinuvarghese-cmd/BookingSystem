@@ -15,10 +15,11 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    @foreach($columns as $column)
-                    <th scope="col">{{$column}}</th>
-                    @endforeach
-                    <th scope="col">Action</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">DESCRIPTION</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">ACTION</th>
                   </tr>
                 </thead>
                 <tbody class="list">
