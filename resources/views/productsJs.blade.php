@@ -22,9 +22,8 @@
                     reload();
                 },
                 error: function (xhr) {
-                    $('#message').html('');
                     $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('#message').append('<div class="alert alert-danger">'+value+'</div');
+                        $('#'+ key).append('<div class="alert alert-danger">'+value+'</div');
                     }); 
                  }
              });
@@ -35,7 +34,7 @@
             var description = $(this).closest('tr').find('.description').text();
             var price = $(this).closest('tr').find('.price').text().trim();
             var id = $(this).attr("id");
-  
+            var tr = $(this).closest('tr');
             $.ajax({
                 url:"{{ route('products.update') }}",
                 method:"POST",
@@ -52,9 +51,8 @@
                     reload();
                 },
                 error: function (xhr) {
-                    $('#message').html('');
                     $.each(xhr.responseJSON.errors, function(key,value) {
-                        $('#message').append('<div class="alert alert-danger">'+value+'</div');
+                        tr.find('td.'+ key).append('<div class="alert alert-danger">'+value+'</div');
                     }); 
                  }
             })

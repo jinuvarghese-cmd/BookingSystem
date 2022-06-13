@@ -29,21 +29,23 @@ Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
-	 Route::get('map', function () {return view('pages.maps');})->name('map');
-	 Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
-	 Route::get('table-list', function () {return view('pages.tables');})->name('table');
+	Route::get('map', function () {return view('pages.maps');})->name('map');
+	Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
+	Route::get('table-list', function () {return view('pages.tables');})->name('table');
+
+	Route::group(['prefix' => 'products'], function () {
+		Route::get('/', [ProductController::class, 'index'])->name('products');
+		Route::post('/reload', [ProductController::class, 'index'])->name('products.reload');
+		Route::post('/create', [ProductController::class, 'create'])->name('products.create');
+		Route::post('/update', [ProductController::class, 'update'])->name('products.update');
+		Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
+	});
+	
+	Route::group(['prefix' => 'bookings'], function () {
+		Route::get('/', [BookingLineController::class, 'index'])->name('bookings');
+	});
 });
 
-Route::group(['prefix' => 'products'], function () {
-    Route::get('/', [ProductController::class, 'index'])->name('products');
-	Route::post('/', [ProductController::class, 'index'])->name('products.reload');
-	Route::post('/create', [ProductController::class, 'create'])->name('products.create');
-	Route::post('/update', [ProductController::class, 'update'])->name('products.update');
-	Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
-});
 
-Route::group(['prefix' => 'bookings'], function () {
-    Route::get('/', [BookingLineController::class, 'index'])->name('bookings');
-});
 
 
