@@ -12,9 +12,10 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $booking = Booking::where("booking_line_id", $request->id);
+        return view('booking', ['booking' => $booking]);   
     }
 
     /**

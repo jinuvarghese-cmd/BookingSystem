@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingLineController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
 	});
 	
-	Route::group(['prefix' => 'bookings'], function () {
-		Route::get('/', [BookingLineController::class, 'index'])->name('bookings');
+	Route::group(['prefix' => 'bookingLines'], function () {
+		Route::get('/', [BookingLineController::class, 'index'])->name('bookingLines');
 	});
+	
+    Route::get('booking/{id}', [BookingController::class, 'index'])->name('booking');
 });
 
 
