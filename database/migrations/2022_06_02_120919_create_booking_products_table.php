@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookingsTable extends Migration
+class CreateBookingProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('booking_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('booking_line_id');
+            $table->unsignedBigInteger('booking_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('user_id');
             $table->date('date');
             $table->unsignedInteger('no_of_products');
             $table->softDeletes();
@@ -32,6 +31,6 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('booking_products');
     }
 }

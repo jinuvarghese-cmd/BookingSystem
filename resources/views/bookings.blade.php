@@ -28,9 +28,9 @@
                     <td id="status"></td>
                   </tr>
                   @php
-                    $slNo = ($bookingLines->perPage() * ($bookingLines->currentPage() - 1));
+                    $slNo = ($bookings->perPage() * ($bookings->currentPage() - 1));
                   @endphp
-                  @foreach($bookingLines as $bookingLine)
+                  @foreach($bookings as $booking)
                     @php
                       $slNo++;
                     @endphp
@@ -39,20 +39,20 @@
                         <p>{{$slNo}}</p>
                     </td>
                     <td class="date">
-                        <p>{{$bookingLine->date}}</p>
+                        <p>{{$booking->date}}</p>
                     </td>
                     <td class="status">
-                        <p>{{$bookingLine->status}}</p>
+                        <p>{{$booking->status}}</p>
                     </td>
                     <td>
-                    <button type="button"  class="btn btn-success btn-xs" onclick="window.location='{{  url('booking/'.$bookingLine->id)}}'">View</button>
+                    <button type="button"  class="btn btn-success btn-xs" onclick="window.location='{{  url('booking/'.$booking->id)}}'">View</button>
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
               <div class="d-flex justify-content-center links-for-pagination">
-                {!! $bookingLines->links() !!}
+                {!! $bookings->links() !!}
               </div>
             </div>
           </div>

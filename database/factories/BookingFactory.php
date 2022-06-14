@@ -3,8 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\BookingLine;
-use App\Models\Product;
 use App\Models\User;
 
 class BookingFactory extends Factory
@@ -16,15 +14,12 @@ class BookingFactory extends Factory
      */
     public function definition()
     {
-        $bookingLine = BookingLine::pluck('id')->toArray();
-        $product = Product::pluck('id')->toArray();
         $user = User::pluck('id')->toArray();
+        $status = ['Orderplaced', 'Orderdelivered'];
         return [
-            'booking_line_id' => $this->faker->randomElement($bookingLine),
-            'product_id' => $this->faker->randomElement($product),
             'user_id' =>  $this->faker->randomElement($user),
-            'date' => $this->faker->dateTime(),
-            'no_of_products' => $this->faker->randomDigitNotNull(),
+            'date' => $this->faker->date(),
+            'status' => $this->faker->randomElement($status)
         ];
     }
 }
