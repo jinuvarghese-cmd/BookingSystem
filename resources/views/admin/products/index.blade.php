@@ -66,7 +66,7 @@
         </div>
       </div>
     @include('layouts.footers.auth')
-    @include('products.productsJs') 
+    @include('admin.products.script') 
 @endsection
 
 

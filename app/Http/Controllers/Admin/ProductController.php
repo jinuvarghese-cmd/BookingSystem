@@ -28,7 +28,7 @@ class ProductController extends Controller
         ]);
        }
        else{
-        return view('products.products', ['products' => $products]);
+        return view('admin.products.index', ['products' => $products]);
        }
        
     }

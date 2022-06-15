@@ -16,12 +16,12 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         $bookings = Booking::simplePaginate(8,['id','date','status']);
-        return view('bookings.bookings', ['bookings' => $bookings]);
+        return view('admin.bookings.index', ['bookings' => $bookings]);
     }
 
     public function view(Request $request)
     {
         $booking = Booking::with(['user', 'bookingProduct', 'product'])->find($request->id);
-        return view('bookings.bookingProducts', ['booking' => $booking]);   
+        return view('admin.bookings.products', ['booking' => $booking]);   
     }
 }
