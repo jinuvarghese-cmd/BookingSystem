@@ -26,7 +26,7 @@ Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' =>'admin'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
 	Route::get('map', function () {return view('pages.maps');})->name('map');
