@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\BookingLineController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\BookingController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +35,17 @@ Route::group(['middleware' =>'admin'], function () {
 
 	Route::group(['prefix' => 'products'], function () {
 		Route::get('/', [ProductController::class, 'index'])->name('products');
-		Route::post('/reload', [ProductController::class, 'index'])->name('products.reload');
+		Route::post('/', [ProductController::class, 'index'])->name('products.reload');
 		Route::post('/create', [ProductController::class, 'create'])->name('products.create');
 		Route::post('/update', [ProductController::class, 'update'])->name('products.update');
 		Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
 	});
 	
 	Route::group(['prefix' => 'bookings'], function () {
-		Route::get('/', [BookingLineController::class, 'index'])->name('bookings');
+		Route::get('/', [BookingController::class, 'index'])->name('bookings');
 	});
+	
+    Route::get('booking/{id}', [BookingController::class, 'view'])->name('bookingProducts');
 });
 
 
