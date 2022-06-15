@@ -156,7 +156,8 @@
  </div>
  <!-- three_box -->
  <!-- products -->
- <div  class="products">
+ <div  class="products">@extends('layouts.frontend', ['class' => 'bg-default'])
+
     <div class="container">
        <div class="row">
           <div class="col-md-12">
