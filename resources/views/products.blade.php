@@ -1,5 +1,6 @@
-@extends('layouts.frontend', ['class' => 'bg-default'])
+@extends('layouts.frontend')
 
 @section('content')
-
+<div>
+</div>
 @endsection

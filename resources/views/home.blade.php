@@ -1,4 +1,4 @@
-@extends('layouts.frontend', ['class' => 'bg-default'])
+@extends('layouts.frontend')
 
 @section('content')
 <section class="banner_main">

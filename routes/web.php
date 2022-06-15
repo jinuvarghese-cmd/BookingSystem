@@ -21,8 +21,6 @@ Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']
 
 Auth::routes();
 
-
-
 Route::group(['middleware' =>'admin'], function () {
 	Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index')->name('admin.dashboard');
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
