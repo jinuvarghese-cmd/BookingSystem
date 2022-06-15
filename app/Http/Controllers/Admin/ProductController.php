@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Yajra\DataTables\Facades\DataTables;
@@ -27,7 +28,7 @@ class ProductController extends Controller
         ]);
        }
        else{
-        return view('products', ['products' => $products]);
+        return view('products.products', ['products' => $products]);
        }
        
     }
