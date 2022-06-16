@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/bootstrap.min.css">
+    
     <!-- style css -->
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/style.css">
     <!-- Responsive-->
@@ -23,6 +24,7 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
         media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 </head>
 

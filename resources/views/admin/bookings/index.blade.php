@@ -45,7 +45,7 @@
                         <p>{{$booking->status}}</p>
                     </td>
                     <td>
-                    <button type="button"  class="btn btn-success btn-xs" onclick="window.location='{{  url('booking/'.$booking->id)}}'">View</button>
+                    <button type="button"  class="btn btn-success btn-xs" onclick="window.location='{{  Request::url() }}/{{ $booking->id}}'">View</button>
                     </td>
                   </tr>
                   @endforeach
