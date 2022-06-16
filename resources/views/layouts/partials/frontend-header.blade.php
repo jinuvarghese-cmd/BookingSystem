@@ -25,9 +25,25 @@
                         <li class="nav-item">
                            <a class="nav-link" href="{{url('/products')}}">Products</a>
                         </li>
+                        @php
+                           if (!Auth::check()) {
+                        @endphp
                         <li class="nav-item d_none">
-                           <a class="nav-link" href="#">Login</a>
+                           <a class="nav-link" href="{{url('/login')}}">Login</a>
                         </li>
+                        @php
+                           }else{
+                        @endphp    
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf
+                        </form>
+                        <li class="nav-item d_none">
+                           <a class="nav-link" href="{{ route('logout') }} " onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">Logout</a>
+                        </li>
+                        @php
+                           }
+                        @endphp
                      </ul>
                   </div>
                </nav>
