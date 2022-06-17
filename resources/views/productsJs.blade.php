@@ -33,8 +33,28 @@
                     no:no_of_items,
                 }
              });
+
+             $(this).parent().append('<p class ="message" style="margin-top:10px; color: #28a745;">Products added to cart</p>');
+             setTimeout(hideMsg, 2000);
         });
 
+        $(document).on('click', '#checkout', function(){
+            $.ajax({
+                url:"{{ route('checkout') }}",
+                method:"POST",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                }
+             });
+
+            $(this).parent().append('<p class ="message" style="position:absolute; top:10px; right:150px; color: #007bff;">Your order is placed</p>');
+            setTimeout(hideMsg, 1000);
+        });
+        
+        function hideMsg(){
+            $(".message").fadeOut();
+        }
+       
         function changePrice(count, priceElement){
             $price = priceElement.data('value');
             $price = "$" + (count * $price);

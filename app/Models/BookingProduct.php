@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BookingProduct extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'booking_id',
+        'product_id',
+        'date',
+        'no_of_products'
+    ];
 
     public function product()
     {

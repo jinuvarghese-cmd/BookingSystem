@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -23,10 +24,11 @@ class ProductController extends Controller
             $products =[];
             $id = $request->id;
             $no = $request->no;
-            
+          
             if ($request->session()->has('products')) {
                 $products = $request->session()->get('products');    
             }
+
             if(isset($products[$id])){
                 $old_no = $products[$id];
                 $products[$id] = (int)$old_no + (int)$no;
