@@ -27,6 +27,7 @@ class BookingController extends Controller
                             'no_of_products' => $product_no
                         ]);
                     }    
+                    return response()->json(['status' => 'success', 'products' => $products, 'booking_id' => $booking->id]);
             }
         }
     }

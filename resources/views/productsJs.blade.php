@@ -44,8 +44,19 @@
                 method:"POST",
                 data:{
                     "_token": "{{ csrf_token() }}",
+                },
+                success: function(data) {
+                    $.ajax({
+                        url:"{{ route('placeOrder') }}",
+                        method:"POST",
+                        data:{
+                        "_token": "{{ csrf_token() }}",
+                        }
+                    }); 
                 }
              });
+
+            
 
             $(this).parent().append('<p class ="message" style="position:absolute; top:10px; right:150px; color: #007bff;">Your order is placed</p>');
             setTimeout(hideMsg, 1000);
