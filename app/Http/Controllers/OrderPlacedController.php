@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\OrderPlaced;
+use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Config;
 
 class OrderPlacedController extends Controller
 {
@@ -16,10 +18,13 @@ class OrderPlacedController extends Controller
      */
     public function send(Request $request)
     {
-        $order = Order::findOrFail($request->order_id);
+        $booking_id = $request->booking_id;
+        $product_bookings =  $request->products;
+        $products = [];
+            foreach($product_bookings as $id => $no){
+                $products[]= Product::find($id);
+            }   
  
-        // Ship the order...
- 
-        Mail::to($request->user())->send(new OrderPlaced($order));
+        Mail::to(Config::get('mail.mail_to_admins.address'))->send(new OrderPlaced($products, $booking_id, $product_bookings));
     }
 }

@@ -50,6 +50,8 @@
                         url:"{{ route('placeOrder') }}",
                         method:"POST",
                         data:{
+                        "products": data.products,
+                        "booking_id": data.booking_id,
                         "_token": "{{ csrf_token() }}",
                         }
                     }); 

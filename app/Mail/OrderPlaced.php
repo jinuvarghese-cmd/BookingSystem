@@ -24,9 +24,11 @@ class OrderPlaced extends Mailable
      *
      * @return void
      */
-    public function __construct(Booking $booking)
+    public function __construct($products, $booking_id, $nos)
     {
-        $this->booking = $booking;
+        $this->products = $products;
+        $this->booking_id = $booking_id;
+        $this->nos = $nos;
     }
 
     /**
@@ -36,6 +38,10 @@ class OrderPlaced extends Mailable
      */
     public function build()
     {
-        return $this->view('email');
+        return $this->view('email')->with([
+            'products' => $this->products,
+            'booking_id' => $this->booking_id,
+            'nos' => $this->nos
+        ]);;
     }
 }
