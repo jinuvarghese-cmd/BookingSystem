@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
+<section class="banner_main">
 <div  class="products">
 <div class="container">
    <div class="row">
@@ -39,10 +40,14 @@
                   {!! $products->links() !!}
                </div>
             </div>
+            @if(Session::has('message'))
+               <p class ="message" style="position:absolute; top:10px; right:150px; color: #007bff;">{{ Session::get('message') }}</p>
+            @endif
          </div>
       </div>
    </div>
 </div>
 </div>
+</section>
 @include('productsJs') 
 @endsection

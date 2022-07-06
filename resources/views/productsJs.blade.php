@@ -41,24 +41,28 @@
         $(document).on('click', '#checkout', function(){
             $.ajax({
                 url:"{{ route('checkout') }}",
-                method:"POST",
+                method:"GET",
                 data:{
                     "_token": "{{ csrf_token() }}",
                 },
                 success: function(data) {
-                    $.ajax({
-                        url:"{{ route('placeOrder') }}",
-                        method:"POST",
-                        data:{
-                        "products": data.products,
-                        "booking_id": data.booking_id,
-                        "_token": "{{ csrf_token() }}",
-                        }
-                    }); 
+                    if(data.products){
+                        $.ajax({
+                            url:"{{ route('placeOrder') }}",
+                            method:"GET",
+                            data:{
+                            "products": data.products,
+                            "booking_id": data.booking_id,
+                            "_token": "{{ csrf_token() }}",
+                            }
+                        }); 
+                    }
+
+                    if(data.url){
+                        window.location=data.url;
+                    }
                 }
              });
-
-            
 
             $(this).parent().append('<p class ="message" style="position:absolute; top:10px; right:150px; color: #007bff;">Your order is placed</p>');
             setTimeout(hideMsg, 1000);
@@ -73,5 +77,7 @@
             $price = "$" + (count * $price);
             priceElement.text($price);
         }
+
+        setTimeout(hideMsg, 2000);
 	});
 </script>

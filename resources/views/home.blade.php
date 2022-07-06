@@ -10,7 +10,7 @@
                    <div class="row">
                       <div class="col-md-6">
                          <div class="text-bg">
-                            <span style="display: inline-block;">Shop Products</span>
+                            <span style="white-space:nowrap;">Shop Products</span>
                          </div>
                       </div>
                    </div>
