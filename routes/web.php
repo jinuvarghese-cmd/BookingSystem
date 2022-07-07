@@ -15,25 +15,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
+Route::post('/products/add-to-cart', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('addToCart');
+Route::get('/booking/checkout', [App\Http\Controllers\BookingController::class, 'checkout'])->name('checkout');
+Route::get('/booking/place-order', [App\Http\Controllers\OrderPlacedController::class, 'send'])->name('placeOrder');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' =>'admin'], function () {
+	Route::get('admin', 'App\Http\Controllers\Admin\DashboardController@index')->name('admin.dashboard');
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-	Route::get('upgrade', function () {return view('pages.upgrade');})->name('upgrade'); 
-	Route::get('map', function () {return view('pages.maps');})->name('map');
-	Route::get('icons', function () {return view('pages.icons');})->name('icons'); 
-	Route::get('table-list', function () {return view('pages.tables');})->name('table');
 
-	Route::group(['prefix' => 'products'], function () {
+	Route::group(['prefix' => 'admin/products'], function () {
 		Route::get('/', [ProductController::class, 'index'])->name('products');
 		Route::post('/', [ProductController::class, 'index'])->name('products.reload');
 		Route::post('/create', [ProductController::class, 'create'])->name('products.create');
@@ -41,11 +36,10 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/delete', [ProductController::class, 'destroy'])->name('products.delete');
 	});
 	
-	Route::group(['prefix' => 'bookings'], function () {
+	Route::group(['prefix' => 'admin/bookings'], function () {
 		Route::get('/', [BookingController::class, 'index'])->name('bookings');
-	});
-	
-    Route::get('booking/{id}', [BookingController::class, 'view'])->name('bookingProducts');
+		Route::get('/{id}', [BookingController::class, 'view'])->name('bookingProducts');
+    });
 });
 
 
